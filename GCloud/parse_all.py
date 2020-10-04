@@ -1,5 +1,5 @@
 import os
-#from gcloud_parser.gcloud_parser import GcloudParser
+from gcloud_parser import GcloudParser
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -8,7 +8,9 @@ import datetime
 import time
 import configparser
 import argparse
+import dill
 
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'c:/Users/whith/Documents/Google_receipts/receipts-svc-acc.json'
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
@@ -104,7 +106,7 @@ if __name__ == '__main__':
                 })
     range_base = spreadsheet_range.split('!')[0]
     for purch in purchases:
-        target_range = '{range_base}!A{num}:L{num}'.format(
+        target_range = '{range_base}!A{num}:Z{num}'.format(
             range_base=range_base, num=next_row)
         iso_week = ''
         iso_month = ''

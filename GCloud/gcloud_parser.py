@@ -5,10 +5,11 @@ import datetime
 import io
 import os
 import pickle
+import dill
 
 SKIPWORDS = ['stk', 'x']
 STOPWORDS = ['CHANGE', 'MASTERCARD', 'BALANCE', 'Total']
-MARKETS = ['Sainsbury', 'lidl', 'Lloyds', 'Tesco']
+MARKETS = ['Sainsbury', 'Lidl', 'Lloyds', 'Tesco']
 BLACKLIST_WORDS = ['steuer-nr']
 
 
@@ -90,7 +91,7 @@ class GcloudParser:
             else:
                 page.save('tmp.jpg')
                 gcloud_response = self.detect_text('tmp.jpg')
-                pickle.dump(gcloud_response, open(pkl_name, 'wb'))
+                dill.dump(gcloud_response, open(pkl_name, 'wb'))
                 os.system('del tmp.jpg')
             _art, _dat, _mar = self.parse_response(gcloud_response)
             articles += _art

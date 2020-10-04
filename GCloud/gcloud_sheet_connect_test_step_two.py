@@ -8,7 +8,7 @@ from google.auth.transport.requests import Request
 spreadsheet_id = '1nz2hgqz4LvOo5POWF7STeIq_dh_PlqIpQc4fSOmiKGE'
 spreadsheet_range = 'Sheet1!A1:A1'
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-oauth_token_path = 'c:/Users/whith/Documents/Google_receipts/sheets.json'
+oauth_token_path = 'c:/Users/whith/Documents/Google_receipts/client_secret.apps.googleusercontent.com.json'
 creds = None
 # The file token.pickle stores the user's access and refresh tokens, and is
 # created automatically when the authorization flow completes for the first
@@ -23,7 +23,6 @@ if not creds or not creds.valid:
     else:
         flow = InstalledAppFlow.from_client_secrets_file(
             oauth_token_path, SCOPES)
-        # '../receipt-parser-f50b734aa273.json', SCOPES)
         creds = flow.run_local_server(port=0)
     # Save the credentials for the next run
     with open('../../token.pickle', 'wb') as token:
