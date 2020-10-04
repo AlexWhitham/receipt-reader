@@ -8,7 +8,7 @@ from google.auth.transport.requests import Request
 spreadsheet_id = '1nz2hgqz4LvOo5POWF7STeIq_dh_PlqIpQc4fSOmiKGE'
 spreadsheet_range = 'Sheet1!A1:A1'
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-oauth_token_path = 'c:/Users/whith/Documents/Google_receipts/credentials.json'
+oauth_token_path = 'c:/Users/whith/Documents/Google_receipts/sheets.json'
 creds = None
 # The file token.pickle stores the user's access and refresh tokens, and is
 # created automatically when the authorization flow completes for the first

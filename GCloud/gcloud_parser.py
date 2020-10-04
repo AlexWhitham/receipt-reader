@@ -5,7 +5,6 @@ import datetime
 import io
 import os
 import pickle
-import dill
 
 SKIPWORDS = ['stk', 'x']
 STOPWORDS = ['CHANGE', 'MASTERCARD', 'BALANCE', 'Total']
@@ -91,7 +90,7 @@ class GcloudParser:
             else:
                 page.save('tmp.jpg')
                 gcloud_response = self.detect_text('tmp.jpg')
-                dill.dump(gcloud_response, open(pkl_name, 'wb'))
+                pickle.dump(gcloud_response, open(pkl_name, 'wb'))
                 os.system('del tmp.jpg')
             _art, _dat, _mar = self.parse_response(gcloud_response)
             articles += _art

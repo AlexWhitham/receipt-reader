@@ -3,7 +3,7 @@ import io
 from pdf2image import convert_from_path
 import os
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'c:/Users/whith/Documents/Google_receipts/main.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'c:/Users/whith/Documents/Google_receipts/service.json'
 
 PATH = 'c:/Users/whith/Google Drive/Receipts/Receipt.pdf'
 pages = convert_from_path(PATH, 501)

@@ -1,5 +1,5 @@
 import os
-from gcloud_parser.gcloud_parser import GcloudParser
+#from gcloud_parser.gcloud_parser import GcloudParser
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -20,6 +20,8 @@ def parse_arguments():
     args = parser.parse_args()
     return args
 
+
+print(parse_arguments())
 
 if __name__ == '__main__':
     args = parse_arguments()

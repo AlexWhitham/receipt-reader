@@ -1,9 +1,9 @@
 from gcloud_parser.gcloud_parser import GcloudParser
 import os
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'c:/Users/whith/Google Drive/Receipts/receipts-01102020-9cb15baf0bfd.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'c:/Users/whith/Documents/Google_receipts/service.json'
 
-PATH = 'c:/Users/whith/Google Drive/Receipts/Receipt.pdf'
+PATH = 'c:/Users/whith/Google Drive/Receipts'
 
 parser = GcloudParser(debug=True)
 
