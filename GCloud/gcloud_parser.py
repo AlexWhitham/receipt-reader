@@ -5,6 +5,7 @@ import datetime
 import io
 import os
 import pickle
+import dill
 
 SKIPWORDS = ['stk', 'x']
 STOPWORDS = ['CHANGE', 'MASTERCARD', 'BALANCE', 'Total']
@@ -90,7 +91,7 @@ class GcloudParser:
             else:
                 page.save('tmp.jpg')
                 gcloud_response = self.detect_text('tmp.jpg')
-                pickle.dump(gcloud_response, open(pkl_name, 'wb'))
+                dill.dump(gcloud_response, open(pkl_name, 'wb'))
                 os.system('del tmp.jpg')
             _art, _dat, _mar = self.parse_response(gcloud_response)
             articles += _art
@@ -173,7 +174,8 @@ class GcloudParser:
         g_ymin = np.min([v.y for v in base_ann.bounding_poly.vertices])
         g_ymax = np.max([v.y for v in base_ann.bounding_poly.vertices])
         break_this = False
-        sorted_annotations = gcloud_response.text_annotations[1:]
+        sorted_annotations = gcloud_response.text_annotations[1:].encode(
+            'utf-8')
         # sorted_annotations = sorted(gcloud_response.text_annotations[1:],
         #                             key=lambda x: x.bounding_poly.vertices[0].y)
         current_name = ''

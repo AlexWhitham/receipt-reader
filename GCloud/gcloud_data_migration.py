@@ -5,10 +5,10 @@ import os
 from google.auth.transport.requests import Request
 
 
-spreadsheet_id = '1kB3Frs2oRIh6d4hD3FL1RDNYhry3dRSc9a7sSxNTXDI'
+spreadsheet_id = '1nz2hgqz4LvOo5POWF7STeIq_dh_PlqIpQc4fSOmiKGE'
 spreadsheet_range = 'Sheet1!A1:A1'
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-oauth_token_path = '../Downloads/client_secret_339936403154-d4igrfc42tefqoi6usscasv1t9jj2fjr.apps.googleusercontent.com.json'
+oauth_token_path = 'c:/Users/whith/Google Drive/Receipts/credentials.json'
 creds = None
 # The file token.pickle stores the user's access and refresh tokens, and is
 # created automatically when the authorization flow completes for the first
@@ -23,7 +23,7 @@ if not creds or not creds.valid:
     else:
         flow = InstalledAppFlow.from_client_secrets_file(
             oauth_token_path, SCOPES)
-            # '../receipt-parser-f50b734aa273.json', SCOPES)
+        # '../receipt-parser-f50b734aa273.json', SCOPES)
         creds = flow.run_local_server(port=0)
     # Save the credentials for the next run
     with open('../../token.pickle', 'wb') as token:
@@ -40,7 +40,7 @@ print('Before Update')
 print(values)
 # perform an update
 sheet.values().update(spreadsheetId=spreadsheet_id, range=spreadsheet_range, body={'values': [['Hello World']]},
-                              valueInputOption='USER_ENTERED').execute()
+                      valueInputOption='USER_ENTERED').execute()
 result = sheet.values().get(spreadsheetId=spreadsheet_id,
                             range=spreadsheet_range).execute()
 values = result.get('values', [])

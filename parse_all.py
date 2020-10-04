@@ -15,7 +15,8 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--settings', dest='settings', help='Provide path to settings file', required=True)
+    parser.add_argument('--settings', dest='settings',
+                        help='Provide path to settings file', required=True)
     args = parser.parse_args()
     return args
 
@@ -44,7 +45,7 @@ if __name__ == '__main__':
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 oauth_token_path, SCOPES)
-                # '../receipt-parser-f50b734aa273.json', SCOPES)
+            # '../receipt-parser-f50b734aa273.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open(oauth_pickle_path, 'wb') as token:
@@ -101,12 +102,15 @@ if __name__ == '__main__':
                 })
     range_base = spreadsheet_range.split('!')[0]
     for purch in purchases:
-        target_range = '{range_base}!A{num}:L{num}'.format(range_base=range_base, num=next_row)
+        target_range = '{range_base}!A{num}:L{num}'.format(
+            range_base=range_base, num=next_row)
         iso_week = ''
         iso_month = ''
         try:
-            iso_week = datetime.datetime.strptime(purch['date'], '%Y-%m-%d').isocalendar()[1]
-            iso_month = datetime.datetime.strptime(purch['date'], '%Y-%m-%d').month
+            iso_week = datetime.datetime.strptime(
+                purch['date'], '%Y-%m-%d').isocalendar()[1]
+            iso_month = datetime.datetime.strptime(
+                purch['date'], '%Y-%m-%d').month
         except:
             pass
         category = ''
@@ -130,4 +134,5 @@ if __name__ == '__main__':
         sheet.values().update(spreadsheetId=spreadsheet_id, range=target_range, body={'values': [values]},
                               valueInputOption='USER_ENTERED').execute()
         next_row += 1
-        time.sleep(1.5) # wait a moment such that we do not exceed google write quotas
+        # wait a moment such that we do not exceed google write quotas
+        time.sleep(1.5)
