@@ -23,8 +23,6 @@ def parse_arguments():
     return args
 
 
-print(parse_arguments())
-
 if __name__ == '__main__':
     args = parse_arguments()
     conf = configparser.ConfigParser()
@@ -49,7 +47,6 @@ if __name__ == '__main__':
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
                 oauth_token_path, SCOPES)
-            # '../receipt-parser-f50b734aa273.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open(oauth_pickle_path, 'wb') as token:
@@ -77,7 +74,6 @@ if __name__ == '__main__':
                 if not row[11] in scanned_filenames:
                     scanned_filenames.append(row[11])
     print('Next Row ' + str(next_row))
-    # code.interact(banner='', local=locals())
 
     parser = GcloudParser()
     files = os.listdir(receipts_base_path)
@@ -87,54 +83,37 @@ if __name__ == '__main__':
         if full_name in scanned_filenames:
             continue
         if os.path.isfile(full_name) and full_name[-4:] == '.pdf':
-            articles, dates, markets = parser.parse_pdf(full_name)
-            if len(markets) > 0:
-                market = markets[0]
-            else:
-                market = 'unknown'
-            if len(dates) > 0:
-                date = dates[0]
-            else:
+            items, prices, date, shop = parser.parse_pdf(full_name)
+            if len(shop) == 0:
+                shop = 'unknown'
+            if len(date) == 0:
                 date = 'unknown'
-            for article in articles:
+            if len(prices) > 0:
+                price = prices[0]
+            else:
+                price = 'unknown'
+            for item in items:
                 purchases.append({
                     'date': date,
-                    'market': market,
-                    'article': article['name'],
-                    'price': article['price'],
+                    'shop': shop,
+                    'item': item,
+                    'price': price,
                     'filename': full_name
                 })
     range_base = spreadsheet_range.split('!')[0]
     for purch in purchases:
         target_range = '{range_base}!A{num}:Z{num}'.format(
             range_base=range_base, num=next_row)
-        iso_week = ''
-        iso_month = ''
-        try:
-            iso_week = datetime.datetime.strptime(
-                purch['date'], '%Y-%m-%d').isocalendar()[1]
-            iso_month = datetime.datetime.strptime(
-                purch['date'], '%Y-%m-%d').month
-        except:
-            pass
         category = ''
-        if purch['article'] in known_categories.keys():
-            category = known_categories[purch['article']]
+        if purch['item'] in known_categories.keys():
+            category = known_categories[purch['item']]
         values = [purch['date'],
-                  purch['article'],
-                  'Nein',
-                  purch['market'],
-                  '',
-                  1,
+                  purch['item'],
+                  purch['shop'],
                   purch['price'],
-                  purch['price'],
-                  iso_week,
                   category,
-                  iso_month,
                   purch['filename']
                   ]
-        print(purch['date'] + ' ' + purch['market'] + ' ' + purch['article'] + ' ' + str(purch['price']) +
-              ' ' + purch['filename'])
         sheet.values().update(spreadsheetId=spreadsheet_id, range=target_range, body={'values': [values]},
                               valueInputOption='USER_ENTERED').execute()
         next_row += 1

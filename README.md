@@ -1,7 +1,7 @@
 # receipt-reader
 Read receipts and upload them to Google Sheets.
 After setting up credentials run in terminal:
-python ./GCloud/parse_all.py --settings ./receipt_parser.conf
+python GCloud/parse_all.py --settings receipt_parser.conf
 
 # based on
     git repo https://github.com/lutzkuen/receipt-parser
