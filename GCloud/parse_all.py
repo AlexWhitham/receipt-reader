@@ -83,16 +83,15 @@ if __name__ == '__main__':
         if full_name in scanned_filenames:
             continue
         if os.path.isfile(full_name) and full_name[-4:] == '.pdf':
-            items, prices, date, shop = parser.parse_pdf(full_name)
+            articles, date, shop = parser.parse_pdf(full_name)
             if len(shop) == 0:
                 shop = 'unknown'
-            if len(date) == 0:
-                date = 'unknown'
-            if len(prices) > 0:
-                price = prices[0]
+            if date != None:
+                if len(date) == 0:
+                    date = 'unknown'
             else:
-                price = 'unknown'
-            for item in items:
+                date = 'unknown'
+            for item, price in articles.items():
                 purchases.append({
                     'date': date,
                     'shop': shop,
@@ -108,8 +107,8 @@ if __name__ == '__main__':
         if purch['item'] in known_categories.keys():
             category = known_categories[purch['item']]
         values = [purch['date'],
-                  purch['item'],
                   purch['shop'],
+                  purch['item'],
                   purch['price'],
                   category,
                   purch['filename']

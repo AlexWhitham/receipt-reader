@@ -7,11 +7,32 @@ import os
 import pickle
 import dill
 
+# filtering out entry by having full match to the words in this list
 SKIPTHIS = ["'",
-            ";Cive well for less;SS;PONTYPRIDD;01443 625200;Sainsburys Supermarkets Ltd;33 Holborn London EC1N 2HT;www.sainsburys.co.uk;Vat Number : 660 4548 36;SmartShop",
-            "#7452;$2274;",
-            ";16 BALANCE DUE",
-            "R67;"]
+            ";SS",
+            ";01443 625200",
+            ";Sainsburys Supermarkets Ltd",
+            ";www.sainsburys.co.uk"
+            ]
+
+# filtering out entire entry by having partial match to a word from this list
+BLACKLIST = ["ORIGINAL PRICE",
+             "@",
+             "#",
+             "well for less",
+             "Holborn",
+             "$",
+             "CANCELLED",
+             "BALANCE",
+             "REDUCTION",
+             "DUPLICATE",
+             "RECEIPT",
+             "SmartShop",
+             "Vat Number",
+             "PONTYPRIDD",
+             "Cashier",
+             "THINK 25"
+             ]
 
 
 class GcloudParser:
@@ -29,7 +50,7 @@ class GcloudParser:
             for substr in date_str.split(" "):
                 try:
                     new_purch_date = datetime.datetime.strptime(
-                        substr, fmt).strftime("%d%m%Y")
+                        substr, fmt).strftime("%d/%m/%Y")
                     return new_purch_date
                 except Exception as e:
                     pass
@@ -37,6 +58,7 @@ class GcloudParser:
 
     def parse_pdf(self, path):
         pages = convert_from_path(path, 500)
+        articles = {}
         items = []
         prices = []
         date = []
@@ -49,17 +71,29 @@ class GcloudParser:
             gcloud_response = gcloud_response.replace("\n", ";")
             for skipword in SKIPTHIS:
                 gcloud_response = gcloud_response.replace(skipword, "")
+
             response_list = list(gcloud_response.split(";"))
+            print(response_list)
             response_list = list(filter(None, response_list))
+            response_list = [word for word in response_list if not any(
+                bad in word for bad in BLACKLIST)]
+
+            if len(response_list[-1]) == 3:
+                response_list = response_list[:-1]
+            else:
+                response_list = response_list[:-2]
 
             amount_items = int(len(response_list[1:-2])/2)
             items += response_list[1:amount_items]
             prices += response_list[amount_items:-1]
-
-            date = self.parse_date(response_list[-1:])
+            articles = dict(zip(items, prices))
+            try:
+                date = self.parse_date(response_list[-1:])
+            except Exception as e:
+                pass
 
             shop = response_list[0]
-        return items, prices, date, shop
+        return articles, date, shop
 
     def detect_text(self, path):
         """Detects text in the file."""
