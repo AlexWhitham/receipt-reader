@@ -91,12 +91,12 @@ if __name__ == '__main__':
                     date = 'unknown'
             else:
                 date = 'unknown'
-            for item, price in articles.items():
+            for no, item in articles.items():
                 purchases.append({
                     'date': date,
                     'shop': shop,
-                    'item': item,
-                    'price': price,
+                    'item': item[0],
+                    'price': item[1],
                     'filename': full_name
                 })
     range_base = spreadsheet_range.split('!')[0]

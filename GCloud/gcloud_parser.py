@@ -10,9 +10,7 @@ import dill
 # filtering out entry by having full match to the words in this list
 SKIPTHIS = ["'",
             ";SS",
-            ";01443 625200",
-            ";Sainsburys Supermarkets Ltd",
-            ";www.sainsburys.co.uk"
+            ";01443 625200"
             ]
 
 # filtering out entire entry by having partial match to a word from this list
@@ -20,7 +18,7 @@ BLACKLIST = ["ORIGINAL PRICE",
              "@",
              "#",
              "well for less",
-             "Holborn",
+             "olborn",
              "$",
              "CANCELLED",
              "BALANCE",
@@ -30,8 +28,9 @@ BLACKLIST = ["ORIGINAL PRICE",
              "SmartShop",
              "Vat Number",
              "PONTYPRIDD",
-             "Cashier",
-             "THINK 25"
+             "ashier",
+             "THINK 25",
+             "ainsburys"
              ]
 
 
@@ -58,6 +57,7 @@ class GcloudParser:
 
     def parse_pdf(self, path):
         pages = convert_from_path(path, 500)
+        item_no = []
         articles = {}
         items = []
         prices = []
@@ -69,30 +69,39 @@ class GcloudParser:
             gcloud_response = self.detect_text("tmp.jpg")
             os.system("del tmp.jpg")
             gcloud_response = gcloud_response.replace("\n", ";")
+            # print(gcloud_response)
             for skipword in SKIPTHIS:
                 gcloud_response = gcloud_response.replace(skipword, "")
 
             response_list = list(gcloud_response.split(";"))
-            print(response_list)
             response_list = list(filter(None, response_list))
             response_list = [word for word in response_list if not any(
                 bad in word for bad in BLACKLIST)]
 
+            while len(response_list[-1]) != 3:
+                response_list = response_list[:-1]
             if len(response_list[-1]) == 3:
                 response_list = response_list[:-1]
-            else:
-                response_list = response_list[:-2]
+            if response_list[-2].startswith("S"):
+                del response_list[-2]
 
-            amount_items = int(len(response_list[1:-2])/2)
+            print(response_list)
+            amount_items = int(len(response_list[0:-1])/2)
+            item_no = list(range(0, amount_items-1))
             items += response_list[1:amount_items]
             prices += response_list[amount_items:-1]
-            articles = dict(zip(items, prices))
+
+            articles = dict(zip(item_no, items))
+            full_price = dict(zip(item_no, prices))
+            for n in item_no:
+                articles[n] = [articles[n], full_price[n]]
+
             try:
                 date = self.parse_date(response_list[-1:])
             except Exception as e:
                 pass
 
-            shop = response_list[0]
+            shop = "Sainsburys"  # response_list[0]
         return articles, date, shop
 
     def detect_text(self, path):
