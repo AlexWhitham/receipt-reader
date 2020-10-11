@@ -9,8 +9,8 @@ import dill
 
 # filtering out entry by having full match to the words in this list
 SKIPTHIS = ["'",
-            ";SS",
-            ";01443 625200"
+            ";SS;",
+            ";C;"
             ]
 
 # filtering out entire entry by having partial match to a word from this list
@@ -31,9 +31,11 @@ BLACKLIST = ["ORIGINAL PRICE",
              "PONTYPRIDD",
              "ashier",
              "THINK 25",
-             "ainsburys",
+             "ainsbury",
              "Supermarket",
-             "660 4548 36"
+             "660 4548 36",
+             "625200",
+             "S2274"
              ]
 
 
@@ -73,8 +75,9 @@ class GcloudParser:
             os.system("del tmp.jpg")
             gcloud_response = gcloud_response.replace("\n", ";")
             # print(gcloud_response)
+            # break
             for skipword in SKIPTHIS:
-                gcloud_response = gcloud_response.replace(skipword, "")
+                gcloud_response = gcloud_response.replace(skipword, ";")
 
             response_list = list(gcloud_response.split(";"))
             response_list = list(filter(None, response_list))
@@ -93,6 +96,7 @@ class GcloudParser:
             item_no = list(range(0, amount_items))
             items += response_list[0:amount_items]
             prices += response_list[amount_items:-1]
+            prices = [p.replace(",", ".") for p in prices]
 
             articles = dict(zip(item_no, items))
             full_price = dict(zip(item_no, prices))
