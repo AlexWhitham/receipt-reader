@@ -2,6 +2,7 @@ import numpy as np
 from google.cloud import vision
 from pdf2image import convert_from_path
 import datetime
+import random
 import io
 import os
 import pickle
@@ -9,7 +10,10 @@ import dill
 
 # filtering out entry by having full match to the words in this list
 SKIPTHIS = [";SS;",
-            ";C;"
+            ";C;",
+            "J$",
+            ";*",
+            "; ;"
             ]
 
 # filtering out entire entry by having partial match to a word from this list
@@ -20,7 +24,6 @@ BLACKLIST = ["ORIGINAL PRICE",
              "well for less",
              "for tess",
              "olborn",
-             "$",
              "CANCELLED",
              "BALANCE",
              "REDUCTION",
@@ -35,7 +38,8 @@ BLACKLIST = ["ORIGINAL PRICE",
              "Supermarket",
              "660 4548 36",
              "625200",
-             "S2274"
+             "S2274",
+             "$",
              ]
 
 
@@ -77,7 +81,8 @@ class GcloudParser:
             # break
             for skipword in SKIPTHIS:
                 gcloud_response = gcloud_response.replace(skipword, ";")
-
+            # print(gcloud_response)
+            # break
             response_list = list(gcloud_response.split(";"))
             response_list = list(filter(None, response_list))
             response_list = [word for word in response_list if not any(
@@ -89,10 +94,12 @@ class GcloudParser:
                 response_list = response_list[:-1]
             if response_list[-2].startswith("S"):
                 del response_list[-2]
-
+            # print(response_list)
+            # break
             amount_items = int(len(response_list[0:-1])/2)
 
             item_no = list(range(0, amount_items))
+            # item_no = [i+random.randint(0, 888) for i in item_no]
             items += response_list[0:amount_items]
             prices += response_list[amount_items:-1]
             prices = [p.replace(",", ".") for p in prices]
