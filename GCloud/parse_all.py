@@ -32,7 +32,7 @@ if __name__ == '__main__':
     oauth_token_path = conf.get('sheets', 'oauth_token')
     oauth_pickle_path = conf.get('sheets', 'oauth_pickle')
     receipts_base_path = conf.get('drive', 'receipts_path')
-    known_categories = dict()
+    # known_categories = dict()
     creds = None
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
@@ -66,13 +66,14 @@ if __name__ == '__main__':
     else:
         for row in values:
             print(str(next_row) + ' - ' + str(row))
-            if not row[1] in known_categories.keys():
-                if row[9]:
-                    known_categories[row[1]] = row[9]
             next_row += 1
-            if len(row) >= 12:
-                if not row[11] in scanned_filenames:
-                    scanned_filenames.append(row[11])
+            if len(row) >= 5:
+                if not row[4] in scanned_filenames:
+                    scanned_filenames.append(row[4])
+            # WIP
+            # if not row[1] in known_categories.keys():
+            #     if row[5]:
+            #         known_categories[row[1]] = row5]
     print('Next Row ' + str(next_row))
 
     parser = GcloudParser()
@@ -103,14 +104,13 @@ if __name__ == '__main__':
     for purch in purchases:
         target_range = '{range_base}!A{num}:Z{num}'.format(
             range_base=range_base, num=next_row)
-        category = ''
-        if purch['item'] in known_categories.keys():
-            category = known_categories[purch['item']]
+        # category = ''
+        # if purch['item'] in known_categories.keys():
+        #     category = known_categories[purch['item']]
         values = [purch['date'],
                   purch['shop'],
                   purch['item'],
                   purch['price'],
-                  category,
                   purch['filename']
                   ]
         sheet.values().update(spreadsheetId=spreadsheet_id, range=target_range, body={'values': [values]},

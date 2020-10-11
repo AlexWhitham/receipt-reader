@@ -18,6 +18,7 @@ BLACKLIST = ["ORIGINAL PRICE",
              "@",
              "#",
              "well for less",
+             "for tess",
              "olborn",
              "$",
              "CANCELLED",
@@ -30,7 +31,9 @@ BLACKLIST = ["ORIGINAL PRICE",
              "PONTYPRIDD",
              "ashier",
              "THINK 25",
-             "ainsburys"
+             "ainsburys",
+             "Supermarket",
+             "660 4548 36"
              ]
 
 
@@ -85,17 +88,17 @@ class GcloudParser:
             if response_list[-2].startswith("S"):
                 del response_list[-2]
 
-            print(response_list)
             amount_items = int(len(response_list[0:-1])/2)
-            item_no = list(range(0, amount_items-1))
-            items += response_list[1:amount_items]
+
+            item_no = list(range(0, amount_items))
+            items += response_list[0:amount_items]
             prices += response_list[amount_items:-1]
 
             articles = dict(zip(item_no, items))
             full_price = dict(zip(item_no, prices))
             for n in item_no:
                 articles[n] = [articles[n], full_price[n]]
-
+            # print(articles)
             try:
                 date = self.parse_date(response_list[-1:])
             except Exception as e:
