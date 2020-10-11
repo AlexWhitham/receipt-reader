@@ -65,7 +65,7 @@ if __name__ == '__main__':
         print('No data found.')
     else:
         for row in values:
-            print(str(next_row) + ' - ' + str(row))
+            #print(str(next_row) + ' - ' + str(row))
             next_row += 1
             if len(row) >= 5:
                 if not row[4] in scanned_filenames:

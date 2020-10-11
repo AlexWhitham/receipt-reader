@@ -16,6 +16,7 @@ SKIPTHIS = [";SS;",
 BLACKLIST = ["ORIGINAL PRICE",
              "@",
              "#",
+             "live well",
              "well for less",
              "for tess",
              "olborn",
@@ -68,7 +69,6 @@ class GcloudParser:
         date = []
         shop = []
         for page in pages:
-            pkl_name = path.replace(".pdf", ".pkl")
             page.save("tmp.jpg")
             gcloud_response = self.detect_text("tmp.jpg")
             os.system("del tmp.jpg")
