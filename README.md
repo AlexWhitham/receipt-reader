@@ -3,6 +3,8 @@ Read Sainsbury's receipts and upload them to Google Sheets.
 After setting up credentials and config file run in terminal:
 python GCloud/parse_all.py --settings receipt_parser.conf
 
+Note: I ususally fold receipt from the last item line down to the date (just after barcode) and scan like that to avoid removing that bit by code.
+
 ### Example config file
 [settings]  
 spreadsheet_id = <'from url of your spreadsheet'>
