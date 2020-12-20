@@ -35,6 +35,8 @@ BLACKLIST = ["ORIGINAL PRICE",
              "ashier",
              "THINK 25",
              "ainsbury",
+             "ainsbur",
+             "www"
              "Supermarket",
              "660 4548 36",
              "625200",
@@ -88,12 +90,17 @@ class GcloudParser:
             response_list = [word for word in response_list if not any(
                 bad in word for bad in BLACKLIST)]
 
-            while len(response_list[-1]) != 3:
+            # the length of the code either 2 or 3 so can set it here
+            last_code_length = 3
+            while len(response_list[-1]) != last_code_length:
                 response_list = response_list[:-1]
-            if len(response_list[-1]) == 3:
+
+            if len(response_list[-1]) == last_code_length:
                 response_list = response_list[:-1]
+
             if response_list[-2].startswith("S"):
                 del response_list[-2]
+
             # print(response_list)
             # break
             amount_items = int(len(response_list[0:-1])/2)
@@ -111,7 +118,7 @@ class GcloudParser:
             # print(articles)
             try:
                 date = self.parse_date(response_list[-1:])
-            except Exception as e:
+            except:
                 pass
 
             shop = "Sainsburys"  # response_list[0]
