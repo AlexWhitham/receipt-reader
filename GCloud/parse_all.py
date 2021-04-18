@@ -10,7 +10,7 @@ import configparser
 import argparse
 import dill
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'c:/Users/whith/Documents/Google_receipts/receipts-svc-acc.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'c:/Users/whith/Google Drive/Receipts/Setup/receipts-svc-acc.json'
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
