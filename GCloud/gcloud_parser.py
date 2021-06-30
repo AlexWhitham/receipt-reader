@@ -6,7 +6,6 @@ import random
 import io
 import os
 import pickle
-import dill
 
 # filtering out entry by having full match to the words in this list
 SKIPTHIS = [";SS;",
