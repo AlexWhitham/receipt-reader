@@ -31,18 +31,20 @@ BLACKLIST = ["ORIGINAL PRICE",
              "SmartShop",
              "Vat Number",
              "PONTYPRIDD",
+             "STEWARTON",
+             "01560 660002",
              "ashier",
              "THINK 25",
              "ainsbury",
              "ainsbur",
-             "www"
+             "www",
              "Supermarket",
              "660 4548 36",
              "625200",
              "S2274",
              "$",
-             "elping everyone eat better"
-             "eat better"
+             "Helping everyone eat better",
+             "eat better",
              "everyone"
              ]
 
