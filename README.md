@@ -20,23 +20,20 @@ for i, image in enumerate(images):
 - You might need to adjust the BLACKLIST
 - Keep an eye on the numbers. Mostly the tool runns like a charm, but sometimes hiccups and mix things up. Double check numbers are alligning with the receipt total 
 
-# Example config file
+## Example config file
 
+```
 [sheets]
-
 spreadsheet_id = <'from url of your spreadsheet'> 
-
 spreadsheet_range = Sheet1!A:Z
-
 oauth_token = <'path to your token'>.json
-
 oauth_pickle = <'path to your token'>.json
 
 [drive]
-
 receipts_path = <'path to your folder in Google Drive'>
+```
 
-## This receipt scanning tool was build after being inspired by this repo:
-git repo https://github.com/lutzkuen/receipt-parser
+## This receipt scanning tool was build after being inspired by following
+- Git repo https://github.com/lutzkuen/receipt-parser
 
-guide https://medium.com/better-programming/google-vision-and-google-sheets-api-line-by-line-receipt-parsing-2e2661261cda
+- Guide https://medium.com/better-programming/google-vision-and-google-sheets-api-line-by-line-receipt-parsing-2e2661261cda
