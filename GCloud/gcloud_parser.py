@@ -41,6 +41,9 @@ BLACKLIST = ["ORIGINAL PRICE",
              "625200",
              "S2274",
              "$",
+             "elping everyone eat better"
+             "eat better"
+             "everyone"
              ]
 
 
