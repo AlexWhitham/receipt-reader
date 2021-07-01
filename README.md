@@ -3,9 +3,9 @@
 # Setup
 - Set up credentials and config file
 - Install poetry: https://python-poetry.org/docs/
-- Download Poppler: http://blog.alivate.com.au/poppler-windows/
-- Extract it and move it to C:\Program Files\
-- In the code section just add poppler_path=r'C:\Program Files\poppler-0.68.0\bin' as shown below
+- Install chocolatey https://chocolatey.org/install
+- Then install poppler using choco: choco install poppler
+
 
 ```
 from pdf2image import convert_from_path
