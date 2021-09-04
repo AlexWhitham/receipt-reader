@@ -45,7 +45,9 @@ BLACKLIST = ["ORIGINAL PRICE",
              "$",
              "Helping everyone eat better",
              "eat better",
-             "everyone"
+             "everyone",
+             "PENRITH",
+             "01768 239520"
              ]
 
 
