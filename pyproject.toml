@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "receipt-reader"
-version = "0.1.1"
+version = "0.2.0"
 description = "Read Sainsbury's receipts and upload them to Google Sheets"
 authors = ["Alexandra Whitham"]
 license = "MIT License"

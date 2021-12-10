@@ -1,7 +1,7 @@
 *.jpg
 *.conf
 *.txt
-output.json
+*.json
 pickling.py
 gcloud_parser_backup.py
 __pycache__/
