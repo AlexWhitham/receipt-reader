@@ -1,11 +1,12 @@
-import numpy as np
-from google.cloud import vision
-from pdf2image import convert_from_path
 import datetime
-import random
 import io
 import os
 import pickle
+import random
+
+import numpy as np
+from google.cloud import vision
+from pdf2image import convert_from_path
 
 # filtering out entry by having full match to the words in this list
 SKIPTHIS = [";SS;", ";C;", "J$", ";*", "; ;"]

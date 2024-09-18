@@ -1,13 +1,14 @@
-import os
-from gcloud_parser import GcloudParser
-from googleapiclient.discovery import build
-from google_auth_oauthlib.flow import InstalledAppFlow
-from google.auth.transport.requests import Request
-import pickle
-import datetime
-import time
-import configparser
 import argparse
+import configparser
+import datetime
+import os
+import pickle
+import time
+
+from gcloud_parser import GcloudParser
+from google.auth.transport.requests import Request
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = (
     'c:/Users/whith/Google Drive/Receipts/Setup/receipts-svc-acc.json'

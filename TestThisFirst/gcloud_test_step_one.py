@@ -1,7 +1,8 @@
-from google.cloud import vision
 import io
-from pdf2image import convert_from_path
 import os
+
+from google.cloud import vision
+from pdf2image import convert_from_path
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = (
     'c:/Users/whith/Google Drive/Receipts/Setup/receipts-svc-acc.json'
