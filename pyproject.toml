@@ -6,7 +6,7 @@ authors = ["Alexandra Whitham"]
 license = "MIT License"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 numpy = "^2.1.1"
 configparser = "^7.1.0"
 argparse = "^1.4.0"
@@ -16,6 +16,8 @@ google-api-python-client = "^2.144.0"
 google-auth-oauthlib = "^1.2.1"
 
 [tool.poetry.dev-dependencies]
+black = "^24.3.0"
+isort = "^5.13"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

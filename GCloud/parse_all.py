@@ -9,15 +9,21 @@ import time
 import configparser
 import argparse
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'c:/Users/whith/Google Drive/Receipts/Setup/receipts-svc-acc.json'
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = (
+    'c:/Users/whith/Google Drive/Receipts/Setup/receipts-svc-acc.json'
+)
 
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--settings', dest='settings',
-                        help='Provide path to settings file', required=True)
+    parser.add_argument(
+        '--settings',
+        dest='settings',
+        help='Provide path to settings file',
+        required=True,
+    )
     args = parser.parse_args()
     return args
 
@@ -44,8 +50,7 @@ if __name__ == '__main__':
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                oauth_token_path, SCOPES)
+            flow = InstalledAppFlow.from_client_secrets_file(oauth_token_path, SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
         with open(oauth_pickle_path, "wb") as token:
@@ -55,8 +60,11 @@ if __name__ == '__main__':
 
     # Call the Sheets API
     sheet = service.spreadsheets()
-    result = sheet.values().get(spreadsheetId=spreadsheet_id,
-                                range=spreadsheet_range).execute()
+    result = (
+        sheet.values()
+        .get(spreadsheetId=spreadsheet_id, range=spreadsheet_range)
+        .execute()
+    )
     values = result.get("values", [])
     scanned_filenames = []
     next_row = 1
@@ -64,7 +72,7 @@ if __name__ == '__main__':
         print("No data found.")
     else:
         for row in values:
-            #print(str(next_row) + " - " + str(row))
+            # print(str(next_row) + " - " + str(row))
             next_row += 1
             if len(row) >= 6:
                 if not row[5] in scanned_filenames:
@@ -92,30 +100,38 @@ if __name__ == '__main__':
             else:
                 date = "unknown"
             for no, item in articles.items():
-                purchases.append({
-                    "no": no,
-                    "date": date,
-                    "shop": shop,
-                    "item": item[0],
-                    "price": item[1],
-                    "filename": full_name
-                })
+                purchases.append(
+                    {
+                        "no": no,
+                        "date": date,
+                        "shop": shop,
+                        "item": item[0],
+                        "price": item[1],
+                        "filename": full_name,
+                    }
+                )
     range_base = spreadsheet_range.split("!")[0]
     for purch in purchases:
         target_range = '{range_base}!A{num}:Z{num}'.format(
-            range_base=range_base, num=next_row)
+            range_base=range_base, num=next_row
+        )
         # category = ""
         # if purch["item"] in known_categories.keys():
         #     category = known_categories[purch["item"]]
-        values = [purch["no"],
-                  purch["date"],
-                  purch["shop"],
-                  purch["item"],
-                  purch["price"],
-                  purch["filename"]
-                  ]
-        sheet.values().update(spreadsheetId=spreadsheet_id, range=target_range, body={"values": [values]},
-                              valueInputOption="USER_ENTERED").execute()
+        values = [
+            purch["no"],
+            purch["date"],
+            purch["shop"],
+            purch["item"],
+            purch["price"],
+            purch["filename"],
+        ]
+        sheet.values().update(
+            spreadsheetId=spreadsheet_id,
+            range=target_range,
+            body={"values": [values]},
+            valueInputOption="USER_ENTERED",
+        ).execute()
         next_row += 1
         # wait a moment such that we do not exceed google write quotas
         time.sleep(1.5)

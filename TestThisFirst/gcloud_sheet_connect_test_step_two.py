@@ -21,8 +21,7 @@ if not creds or not creds.valid:
     if creds and creds.expired and creds.refresh_token:
         creds.refresh(Request())
     else:
-        flow = InstalledAppFlow.from_client_secrets_file(
-            oauth_token_path, SCOPES)
+        flow = InstalledAppFlow.from_client_secrets_file(oauth_token_path, SCOPES)
         creds = flow.run_local_server(port=0)
     # Save the credentials for the next run
     with open('../../token.pickle', 'wb') as token:
@@ -32,16 +31,22 @@ service = build('sheets', 'v4', credentials=creds)
 
 # Call the Sheets API
 sheet = service.spreadsheets()
-result = sheet.values().get(spreadsheetId=spreadsheet_id,
-                            range=spreadsheet_range).execute()
+result = (
+    sheet.values().get(spreadsheetId=spreadsheet_id, range=spreadsheet_range).execute()
+)
 values = result.get('values', [])
 print('Before Update')
 print(values)
 # perform an update
-sheet.values().update(spreadsheetId=spreadsheet_id, range=spreadsheet_range, body={'values': [['Hello World']]},
-                      valueInputOption='USER_ENTERED').execute()
-result = sheet.values().get(spreadsheetId=spreadsheet_id,
-                            range=spreadsheet_range).execute()
+sheet.values().update(
+    spreadsheetId=spreadsheet_id,
+    range=spreadsheet_range,
+    body={'values': [['Hello World']]},
+    valueInputOption='USER_ENTERED',
+).execute()
+result = (
+    sheet.values().get(spreadsheetId=spreadsheet_id, range=spreadsheet_range).execute()
+)
 values = result.get('values', [])
 print('After Update')
 print(values)

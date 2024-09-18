@@ -8,47 +8,43 @@ import os
 import pickle
 
 # filtering out entry by having full match to the words in this list
-SKIPTHIS = [";SS;",
-            ";C;",
-            "J$",
-            ";*",
-            "; ;"
-            ]
+SKIPTHIS = [";SS;", ";C;", "J$", ";*", "; ;"]
 
 # filtering out entire entry by having partial match to a word from this list
-BLACKLIST = ["ORIGINAL PRICE",
-             "@",
-             "#",
-             "live well",
-             "well for less",
-             "for tess",
-             "olborn",
-             "CANCELLED",
-             "BALANCE",
-             "REDUCTION",
-             "DUPLICATE",
-             "RECEIPT",
-             "SmartShop",
-             "Vat Number",
-             "PONTYPRIDD",
-             "STEWARTON",
-             "01560 660002",
-             "ashier",
-             "THINK 25",
-             "ainsbury",
-             "ainsbur",
-             "www",
-             "Supermarket",
-             "660 4548 36",
-             "625200",
-             "S2274",
-             "$",
-             "Helping everyone eat better",
-             "eat better",
-             "everyone",
-             "PENRITH",
-             "01768 239520"
-             ]
+BLACKLIST = [
+    "ORIGINAL PRICE",
+    "@",
+    "#",
+    "live well",
+    "well for less",
+    "for tess",
+    "olborn",
+    "CANCELLED",
+    "BALANCE",
+    "REDUCTION",
+    "DUPLICATE",
+    "RECEIPT",
+    "SmartShop",
+    "Vat Number",
+    "PONTYPRIDD",
+    "STEWARTON",
+    "01560 660002",
+    "ashier",
+    "THINK 25",
+    "ainsbury",
+    "ainsbur",
+    "www",
+    "Supermarket",
+    "660 4548 36",
+    "625200",
+    "S2274",
+    "$",
+    "Helping everyone eat better",
+    "eat better",
+    "everyone",
+    "PENRITH",
+    "01768 239520",
+]
 
 
 class GcloudParser:
@@ -65,8 +61,9 @@ class GcloudParser:
         for fmt in ["%d.%m.%y", "%Y-%m-%d", "%d.%m.%y %H:%M", "%d.%m.%Y", "%d%b%Y"]:
             for substr in date_str.split(" "):
                 try:
-                    new_purch_date = datetime.datetime.strptime(
-                        substr, fmt).strftime("%d/%m/%Y")
+                    new_purch_date = datetime.datetime.strptime(substr, fmt).strftime(
+                        "%d/%m/%Y"
+                    )
                     return new_purch_date
                 except Exception as e:
                     pass
@@ -93,8 +90,11 @@ class GcloudParser:
             # break
             response_list = list(gcloud_response.split(";"))
             response_list = list(filter(None, response_list))
-            response_list = [word for word in response_list if not any(
-                bad in word for bad in BLACKLIST)]
+            response_list = [
+                word
+                for word in response_list
+                if not any(bad in word for bad in BLACKLIST)
+            ]
 
             # the length of the code either 2 or 3 so can set it here
             last_code_length = 3
@@ -109,7 +109,7 @@ class GcloudParser:
 
             # print(response_list)
             # break
-            amount_items = int(len(response_list[0:-1])/2)
+            amount_items = int(len(response_list[0:-1]) / 2)
 
             item_no = list(range(0, amount_items))
             # item_no = [i+random.randint(0, 888) for i in item_no]
@@ -140,5 +140,7 @@ class GcloudParser:
             raise Exception(
                 "{}\nFor more info on error messages, check: "
                 "https://cloud.google.com/apis/design/errors".format(
-                    response.error.message))
+                    response.error.message
+                )
+            )
         return response.text_annotations[0].description
