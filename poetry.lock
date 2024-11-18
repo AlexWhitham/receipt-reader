@@ -243,13 +243,13 @@ grpcio-gcp = ["grpcio-gcp (>=0.2.2,<1.0.dev0)"]
 
 [[package]]
 name = "google-api-python-client"
-version = "2.151.0"
+version = "2.153.0"
 description = "Google API Client Library for Python"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google_api_python_client-2.151.0-py2.py3-none-any.whl", hash = "sha256:4427b2f47cd88b0355d540c2c52215f68c337f3bc9d6aae1ceeae4525977504c"},
-    {file = "google_api_python_client-2.151.0.tar.gz", hash = "sha256:a9d26d630810ed4631aea21d1de3e42072f98240aaf184a8a1a874a371115034"},
+    {file = "google_api_python_client-2.153.0-py2.py3-none-any.whl", hash = "sha256:6ff13bbfa92a57972e33ec3808e18309e5981b8ca1300e5da23bf2b4d6947384"},
+    {file = "google_api_python_client-2.153.0.tar.gz", hash = "sha256:35cce8647f9c163fc04fb4d811fc91aae51954a2bdd74918decbe0e65d791dd2"},
 ]
 
 [package.dependencies]
@@ -317,13 +317,13 @@ tool = ["click (>=6.0.0)"]
 
 [[package]]
 name = "google-cloud-vision"
-version = "3.8.0"
+version = "3.8.1"
 description = "Google Cloud Vision API client library"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google_cloud_vision-3.8.0-py2.py3-none-any.whl", hash = "sha256:cf63d8dbd1d1b5ead11eb061aeedbe139105029de7558f5bfbcd7b9abeaf6476"},
-    {file = "google_cloud_vision-3.8.0.tar.gz", hash = "sha256:591c9d1ca26308f10557fd0b1feccebaa7a65199f7027b77dc7311820400720b"},
+    {file = "google_cloud_vision-3.8.1-py2.py3-none-any.whl", hash = "sha256:e8c0c39747ead61b745bee949c4ba924865e8fac31c5d60c31cbbf2632ceda7e"},
+    {file = "google_cloud_vision-3.8.1.tar.gz", hash = "sha256:75c7f9c22199ba663cea7d6c1193d5a72ac1e5e2215346a852af133ce69c4f5f"},
 ]
 
 [package.dependencies]
@@ -868,4 +868,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "9f6edc6746e8d87c0aee4ff49857b12d8a50672ff849c21860842a0df7379529"
+content-hash = "e6ad849c95e6d0f705fb04985a7434c4bb4285b6e43a5e05c92cb92d7d71fd22"
