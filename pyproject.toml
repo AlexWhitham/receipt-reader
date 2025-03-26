@@ -12,7 +12,7 @@ configparser = "^7.2.0"
 argparse = "^1.4.0"
 pdf2image = "^1.17.0"
 google-cloud-vision = "^3.10.1"
-google-api-python-client = "^2.164.0"
+google-api-python-client = "^2.165.0"
 google-auth-oauthlib = "^1.2.1"
 
 [tool.poetry.dev-dependencies]
