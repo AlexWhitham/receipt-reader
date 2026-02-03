@@ -7,7 +7,7 @@ license = "MIT License"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-numpy = "^2.4.1"
+numpy = "^2.4.2"
 configparser = "^7.2.0"
 argparse = "^1.4.0"
 pdf2image = "^1.17.0"
