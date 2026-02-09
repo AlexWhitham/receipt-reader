@@ -7,12 +7,12 @@ license = "MIT License"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-numpy = "^2.4.1"
+numpy = "^2.4.2"
 configparser = "^7.2.0"
 argparse = "^1.4.0"
 pdf2image = "^1.17.0"
-google-cloud-vision = "^3.12.0"
-google-api-python-client = "^2.188.0"
+google-cloud-vision = "^3.12.1"
+google-api-python-client = "^2.189.0"
 google-auth-oauthlib = "^1.2.4"
 
 [tool.poetry.dev-dependencies]
