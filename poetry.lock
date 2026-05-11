@@ -329,6 +329,7 @@ python-versions = ">=3.9"
 groups = ["main"]
 files = [
     {file = "google_auth_oauthlib-1.3.1-py3-none-any.whl", hash = "sha256:1a139ef23f1318756805b0e95f655c238bffd29655329a2978218248da4ee7f8"},
+    {file = "google_auth_oauthlib-1.3.1.tar.gz", hash = "sha256:14c22c7b3dd3d06dbe44264144409039465effdd1eef94f7ce3710e486cc4bfa"},
 ]
 
 [package.dependencies]
@@ -1021,14 +1022,14 @@ files = [
 
 [[package]]
 name = "urllib3"
-version = "2.6.3"
+version = "2.7.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "urllib3-2.6.3-py3-none-any.whl", hash = "sha256:bf272323e553dfb2e87d9bfd225ca7b0f467b919d7bbd355436d3fd37cb0acd4"},
-    {file = "urllib3-2.6.3.tar.gz", hash = "sha256:1b62b6884944a57dbe321509ab94fd4d3b307075e0c2eae991ac71ee15ad38ed"},
+    {file = "urllib3-2.7.0-py3-none-any.whl", hash = "sha256:9fb4c81ebbb1ce9531cce37674bbc6f1360472bc18ca9a553ede278ef7276897"},
+    {file = "urllib3-2.7.0.tar.gz", hash = "sha256:231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c"},
 ]
 
 [package.extras]
@@ -1040,4 +1041,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "45b31a227c3a55f6df123c24acd198f7290cb26b6de4a3d14362fe55e2ba8b44"
+content-hash = "51239cebe4a46490c00aff5311b452b3f5c549a8ab62914c8a6a11fe51685d8c"
