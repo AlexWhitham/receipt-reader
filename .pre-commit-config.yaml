@@ -9,17 +9,13 @@ repos:
       - id: check-merge-conflict
       - id: detect-private-key
 
-  - repo: https://github.com/psf/black
-    rev: 26.5.1
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.0
     hooks:
-      - id: black
+      - id: ruff
+        args: [--no-fix]
+      - id: ruff-format
         args: [--check]
-
-  - repo: https://github.com/PyCQA/isort
-    rev: 9.0.0
-    hooks:
-      - id: isort
-        args: [--check-only, --profile, black]
 
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.9.1
