@@ -2,7 +2,7 @@
 
 # Setup
 - Set up credentials and config file
-- Install poetry: https://python-poetry.org/docs/
+- Install uv: https://docs.astral.sh/uv/getting-started/installation/
 - Install chocolatey https://chocolatey.org/install
 - Then install poppler using choco: choco install poppler
 ```
@@ -13,7 +13,7 @@ for i, image in enumerate(images):
     image.save(fname, "PNG")
 ```
 - Run in terminal:
-``` poetry run python GCloud/parse_all.py --settings receipt_parser.conf ```
+``` uv run python GCloud/parse_all.py --settings receipt_parser.conf ```
 
 ## Note: 
 - Before scanning fold receipt from the last item line down to the date (just after barcode) and scan like that (One day I'll remove that bit with code...maybe)
