@@ -21,6 +21,12 @@ dev = ["black>=26.5.1,<27.0.0", "isort>=9.0,<10.0"]
 [tool.uv]
 package = false
 
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "1.0.0"
+version_scheme = "pep440"
+version_provider = "uv"
+update_changelog_on_bump = true
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"

@@ -28,4 +28,3 @@ jobs:
       run: |
         poetry run isort --profile black --check --diff ./
         poetry run black --skip-string-normalization --check --diff ./
-
