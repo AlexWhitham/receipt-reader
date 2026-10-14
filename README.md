@@ -2,7 +2,7 @@
 
 # Setup
 - Set up credentials and config file
-- Install poetry: https://python-poetry.org/docs/
+- Install uv: https://docs.astral.sh/uv/getting-started/installation/
 - Install chocolatey https://chocolatey.org/install
 - Then install poppler using choco: choco install poppler
 ```
@@ -13,18 +13,18 @@ for i, image in enumerate(images):
     image.save(fname, "PNG")
 ```
 - Run in terminal:
-``` poetry run python GCloud/parse_all.py --settings receipt_parser.conf ```
+``` uv run python GCloud/parse_all.py --settings receipt_parser.conf ```
 
-## Note: 
+## Note:
 - Before scanning fold receipt from the last item line down to the date (just after barcode) and scan like that (One day I'll remove that bit with code...maybe)
 - You might need to adjust the BLACKLIST
-- Keep an eye on the numbers. Mostly the tool runns like a charm, but sometimes hiccups and mix things up. Double check numbers are alligning with the receipt total 
+- Keep an eye on the numbers. Mostly the tool runns like a charm, but sometimes hiccups and mix things up. Double check numbers are alligning with the receipt total
 
 ## Example config file
 
 ```
 [sheets]
-spreadsheet_id = <'from url of your spreadsheet'> 
+spreadsheet_id = <'from url of your spreadsheet'>
 spreadsheet_range = Sheet1!A:Z
 oauth_token = <'path to your token'>.json
 oauth_pickle = <'path to your token'>.json

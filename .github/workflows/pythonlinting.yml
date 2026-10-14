@@ -1,31 +1,23 @@
-name: Pylint
+name: Python linting
 
-on: [push]
+on: [push, pull_request]
 
 permissions:
   contents: read
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
-        poetry-version: ["1.8.3"]
+  lint:
+    runs-on: ubuntu-24.04
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Set up Poetry ${{ matrix.poetry-version }}
-      uses: abatilo/actions-poetry@v2
-      with:
-        poetry-version: ${{ matrix.poetry-version }}
-    - name: Install Dependencies
-      run: poetry install
-    - name: Python Linting
-      run: |
-        poetry run isort --profile black --check --diff ./
-        poetry run black --skip-string-normalization --check --diff ./
-
+      - uses: actions/checkout@v7
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@v10.3.0
+        with:
+          enable-cache: true
+          python-version: "3.15"
+      - name: Install dependencies
+        run: uv sync --locked
+      - name: Check lint
+        run: uv run ruff check .
+      - name: Check formatting
+        run: uv run ruff format --check .

@@ -1,10 +1,7 @@
 import datetime
 import io
 import os
-import pickle
-import random
 
-import numpy as np
 from google.cloud import vision
 from pdf2image import convert_from_path
 
@@ -66,7 +63,7 @@ class GcloudParser:
                         "%d/%m/%Y"
                     )
                     return new_purch_date
-                except Exception as e:
+                except ValueError:
                     pass
         return None
 
@@ -125,7 +122,7 @@ class GcloudParser:
             # print(articles)
             try:
                 date = self.parse_date(response_list[-1:])
-            except:
+            except IndexError, ValueError:
                 pass
 
             shop = "Sainsburys"  # response_list[0]

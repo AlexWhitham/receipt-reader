@@ -1,6 +1,5 @@
 import argparse
 import configparser
-import datetime
 import os
 import pickle
 import time
@@ -10,26 +9,26 @@ from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 
-os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = (
-    'c:/Users/whith/Google Drive/Receipts/Setup/receipts-svc-acc.json'
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = (
+    "c:/Users/whith/Google Drive/Receipts/Setup/receipts-svc-acc.json"
 )
 
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
+SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        '--settings',
-        dest='settings',
-        help='Provide path to settings file',
+        "--settings",
+        dest="settings",
+        help="Provide path to settings file",
         required=True,
     )
     args = parser.parse_args()
     return args
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     args = parse_arguments()
     conf = configparser.ConfigParser()
     conf.read(args.settings)
@@ -76,7 +75,7 @@ if __name__ == '__main__':
             # print(str(next_row) + " - " + str(row))
             next_row += 1
             if len(row) >= 6:
-                if not row[5] in scanned_filenames:
+                if row[5] not in scanned_filenames:
                     scanned_filenames.append(row[5])
             # WIP
             # if not row[1] in known_categories.keys():
@@ -95,7 +94,7 @@ if __name__ == '__main__':
             articles, date, shop = parser.parse_pdf(full_name)
             if len(shop) == 0:
                 shop = "unknown"
-            if date != None:
+            if date is not None:
                 if len(date) == 0:
                     date = "unknown"
             else:
@@ -113,7 +112,7 @@ if __name__ == '__main__':
                 )
     range_base = spreadsheet_range.split("!")[0]
     for purch in purchases:
-        target_range = '{range_base}!A{num}:Z{num}'.format(
+        target_range = "{range_base}!A{num}:Z{num}".format(
             range_base=range_base, num=next_row
         )
         # category = ""
