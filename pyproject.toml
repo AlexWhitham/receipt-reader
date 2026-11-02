@@ -8,7 +8,7 @@ license = "MIT License"
 [tool.poetry.dependencies]
 python = "^3.12"
 numpy = "^2.5.4"
-configparser = "^7.2.0"
+configparser = "^7.3.0"
 argparse = "^1.4.0"
 pdf2image = "^1.17.0"
 google-cloud-vision = "^3.13.0"
